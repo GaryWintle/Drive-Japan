@@ -6,8 +6,7 @@ function TestQuestions() {
   const [answeredQuestions, setAnsweredQuestions] = useState({});
   const [quizQuestions, setQuizQuestions] = useState([]);
   const [isTestCompleted, setIsTestCompleted] = useState(false);
-
-  const questionLimit = 5;
+  const questionLimit = 45;
 
   useEffect(() => {
     const shuffled = [...questions].sort(() => 0.5 - Math.random());
@@ -42,33 +41,44 @@ function TestQuestions() {
   };
 
   return (
-    <>
+    <div className="question-card-container">
       {quizQuestions.map((question, index) => (
         <div key={question.id} className="question-card">
+          {/* Question Number */}
           <h3 className="question-number">
             Question {index + 1} of {quizQuestions.length}
           </h3>
+
+          {/* Question Text */}
           <p className="question-text">{question.questionText}</p>
-          <button
-            onClick={() => quizButtonTrue(question.id, true)}
-            disabled={question.id in answeredQuestions}
-          >
-            True
-          </button>
-          <button
-            onClick={() => quizButtonTrue(question.id, false)}
-            disabled={question.id in answeredQuestions}
-          >
-            False
-          </button>
+
+          {/* True or False Buttons */}
+          <div className="trueorfalse-buttons">
+            <button
+              className="true-btn"
+              onClick={() => quizButtonTrue(question.id, true)}
+              disabled={question.id in answeredQuestions}
+            >
+              True
+            </button>
+            <button
+              className="false-btn"
+              onClick={() => quizButtonTrue(question.id, false)}
+              disabled={question.id in answeredQuestions}
+            >
+              False
+            </button>
+          </div>
+
+          {/* Answer Text */}
 
           {isTestCompleted && !answeredQuestions[question.id] && (
             <p className="answer-text">{question.answerText}</p>
           )}
         </div>
       ))}
-      <h1>Score: {score}</h1>
-    </>
+      {/* <h1>Score: {score}</h1> */}
+    </div>
   );
 }
 
