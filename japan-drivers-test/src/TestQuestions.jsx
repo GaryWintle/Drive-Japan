@@ -1,12 +1,12 @@
 import { questions } from "./questions.js";
+import { QuizButtons } from "./QuizButtons.jsx";
 import { useState, useEffect } from "react";
 
-function TestQuestions() {
-  const [score, setScore] = useState(0);
+function TestQuestions({ score, setScore }) {
   const [answeredQuestions, setAnsweredQuestions] = useState({});
   const [quizQuestions, setQuizQuestions] = useState([]);
   const [isTestCompleted, setIsTestCompleted] = useState(false);
-  const questionLimit = 45;
+  const questionLimit = 5;
 
   useEffect(() => {
     const shuffled = [...questions].sort(() => 0.5 - Math.random());
@@ -14,11 +14,6 @@ function TestQuestions() {
   }, []);
 
   const quizButtonTrue = (questionId, answer) => {
-    if (questionId in answeredQuestions) {
-      console.log("You've already answered this question!");
-      return;
-    }
-
     const question = quizQuestions.find((q) => q.id === questionId);
     const isCorrect = question.answer === answer;
     if (isCorrect) {
@@ -77,7 +72,11 @@ function TestQuestions() {
           )}
         </div>
       ))}
-      {/* <h1>Score: {score}</h1> */}
+      {isTestCompleted && (
+        <h1>
+          You got {score} out of {questionLimit} right!
+        </h1>
+      )}
     </div>
   );
 }

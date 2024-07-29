@@ -39,7 +39,7 @@ body {
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
-  color: red;
+  color: rgb(255, 255, 255);
 }
 
 .question-card-container {
@@ -65,6 +65,10 @@ h1 {
     2px 3px 3px hsla(210, 78%, 17%, 0.03),
     -5px -10px 20px hsla(210, 100%, 98%, 0.14),
     -2px -3px 6px hsla(210, 100%, 98%, 0.14);
+}
+
+.question-number:hover {
+  color: hsl(211, 28%, 36%);
 }
 
 .question-number {
